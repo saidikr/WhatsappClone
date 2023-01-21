@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'msg': "url('src/assets/images/bg.webp')",
+      },
       screens: {
         "whatsapp-bp":"755px",
       },

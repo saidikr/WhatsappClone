@@ -26,6 +26,7 @@ function Chats({filter}) {
         {/* Chats */}
             {chats.map((chat,i)=>(
             <Chat 
+            key={i}
             pp={chat.pp}
             contact={chat.contact}
             msg={chat.msg}
