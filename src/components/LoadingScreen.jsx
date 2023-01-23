@@ -17,7 +17,7 @@ function LoadingScreen({progress}) {
         <div className='flex flex-col justify-evenly items-center h-[150px]'>
             <ProgressBar variant='success' now={progress} className='bg-[#243138] rounded-lg w-[320px] h-[3px]' />
             <div className='flex flex-col items-center'>
-                <h1 className='text-[#c1c6c9] text-lg font-medium'>WhatsApp</h1>
+                <h1 className='text-[#c1c6c9] text-lg font-medium'>ChatMessagApp</h1>
                 <div className='flex items-center text-[#687782]'>
                     <span className='text-sm mr-3'>
                         <FaLock/>
