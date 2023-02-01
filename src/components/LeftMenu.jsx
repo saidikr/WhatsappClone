@@ -29,7 +29,8 @@ function LeftMenu() {
             {/* SearchBar */}
             <input type="text" placeholder='Search or start a new chat' className='rounded-lg bg-[#202d33] text-[#8796a1] text-sm font-light outline-none py-2 px-4 w-[400px] h-[35px] placeholder:text-[#8796a1] placeholder:text-sm placeholder:font-light'/>
             {/* FilterButton */}
-            <button onClick={()=>setFilter(!filter)} className={`text-2xl m-2 p-1 rounded-full ${filter ? "bg-emerald-500 text-white rounded-full hover:bg-emerald-700" : "text-[#8796a1] hover:bg-[#3c454c]"}`}><BiFilter/></button>
+            {/* <button onClick={()=>setFilter(!filter)} className={`text-2xl m-2 p-1 rounded-full ${filter ? "bg-emerald-500 text-white rounded-full hover:bg-emerald-700" : "text-[#8796a1] hover:bg-[#3c454c]"}`}><BiFilter/></button> */}
+            <button  className={`text-2xl m-2 p-1 rounded-full ${filter ? "bg-emerald-500 text-white rounded-full hover:bg-emerald-700" : "text-[#8796a1] hover:bg-[#3c454c]"}`}><BiFilter/></button>
         </div>
         </div>
         {/* Chats */}

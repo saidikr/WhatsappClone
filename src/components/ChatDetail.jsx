@@ -6,31 +6,32 @@ import {cs1,cs2} from "../assets/whatsapp"
 import { BiHappy } from 'react-icons/bi'
 import { AiOutlinePaperClip } from 'react-icons/ai'
 import { BsFillMicFill } from 'react-icons/bs'
-import { messagesData } from '../data/whatsapp'
+// import { messagesData } from '../data/whatsapp'
 import { useState,useEffect,useRef } from 'react'
 import Message from './Message'
 import { getTime } from '../service/whatsapp'
+import axios from '../service/axios'
 
-function ChatDetail() {
+function ChatDetail({msg}) {
 
-const [messages, setMessages] = useState(messagesData);
+ const [messages, setMessages] = useState(msg);
 const [typing,setTyping]=useState(false);
 const inputRef=useRef(null);
 const BottomRef=useRef(null);
-const addMessage=(msg)=>{
-  const newMessage=[...messages,msg]
-  setMessages(newMessage);
-}
+// const addMessage=(msg)=>{
+//   const newMessage=[...messages,msg]
+//   setMessages(newMessage);
+// }
 
-const handleInputSubmit=()=>{
+const handleInputSubmit=async ()=>{
   if(inputRef.current.value.length > 0){
-    addMessage(
-    {
-      msg:inputRef.current.value,
-      time:getTime(),
-      sent:true
-    }
-  )
+  
+      await axios.post("/api/v1/messages/new",{
+        message:inputRef.current.value,
+        name:"me",
+        timestamp:'far away',
+        received:false,
+      });
       inputRef.current.value="";
       inputRef.current.focus();
       setTyping(false)
@@ -41,7 +42,7 @@ const handleInputSubmit=()=>{
       BottomRef.current?.scrollIntoView({
         behavior:"smooth",
       })
-    }, [messages]);
+    }, [msg]);
     useEffect(() => {
       const listener=(e)=>{
         if(e.code==="Enter") handleInputSubmit();
@@ -85,7 +86,7 @@ return (
     </div>
     {/* messages section */}
     <div style={{padding:"12px 7%"}} className='h-full bg-msg bg-contain overflow-y-scroll' >
-      {messages.map((msg1,i)=>(
+      {msg.map((msg1,i)=>(
         <Message 
         key={i}
         msg={msg1}

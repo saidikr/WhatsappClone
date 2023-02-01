@@ -2,7 +2,9 @@ import React from 'react'
 function Message(msg) {
     return (
         //Message container
-    <div className={`flex justify-center items-center rounded-md w-fit my-1 ${msg.msg.sent ? "bg-[#005c4b] ml-auto":"bg-[#202d33] mr-auto"}`}>
+    <div className='flex flex-col'>
+    <p className={`${msg.msg.received ? "mr-auto  text-white text-sm font-bold":"ml-auto text-white text-sm font-bold"}`}>{msg.msg.name}</p>
+    <div className={`flex justify-center items-center rounded-md w-fit my-1 ${msg.msg.received ? "bg-[#202d33] mr-auto":"bg-[#005c4b] ml-auto"}`}>
     {msg.msg.img? (
         <div className='relative w-full p-2'>
             <img className='rounded-md max-w-[270px] w-full' src={msg.msg.img} alt="imgmessage" />
@@ -16,13 +18,14 @@ function Message(msg) {
                     {msg.msg.msg}
                 </a>
             ):(
-                <p className='text-white text-sm mr-2'>{msg.msg.msg}</p>
+                <p className='text-white text-sm mr-2'>{msg.msg.message}</p>
             )}
             <p className='text-[#8796a1] text-[10px] min-w-[50px]'>
                 {msg.msg.time}
             </p>
         </div>)
 }
+    </div>
     </div>
   )
 }

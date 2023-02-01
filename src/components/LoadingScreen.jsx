@@ -1,5 +1,6 @@
 import React from 'react'
 import { BsWhatsapp } from 'react-icons/bs'
+import fav from '/favicon.ico'
 import { FaLock } from 'react-icons/fa'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -11,7 +12,8 @@ function LoadingScreen({progress}) {
     <div className='flex flex-col justify-center items-center bg-[#111a21] w-screen h-screen'>
         {/* whatsapp icon */}
         <span className='text-[#3d464a] text-6xl my-12'>
-            <BsWhatsapp/>
+            {/* <BsWhatsapp/> */}
+            <img src={fav} className="w-28 h-28" alt="" />
         </span>
         {/* loading bar and text */}
         <div className='flex flex-col justify-evenly items-center h-[150px]'>

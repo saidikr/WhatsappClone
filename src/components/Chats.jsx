@@ -24,7 +24,7 @@ function Chats({filter}) {
             <p className='text-emerald-500 text-xs font-light'>7</p>
         </div>
         {/* Chats */}
-            {chats.map((chat,i)=>(
+            {/* {chats.map((chat,i)=>(
             <Chat 
             key={i}
             pp={chat.pp}
@@ -34,7 +34,16 @@ function Chats({filter}) {
             unreadMsgs={chat.unreadMsgs}
             active={i===0}
             />
-        ))}
+        ))} */}
+        <Chat 
+            key={123}
+            pp={chats[0].pp}
+            contact={chats[0].contact}
+            msg={chats[0].msg}
+            time={chats[0].time}
+            unreadMsgs={chats[0].unreadMsgs}
+            active={true}
+            />
     </div>
   )
 }

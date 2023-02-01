@@ -4,6 +4,9 @@ import { useEffect } from 'react'
 import ChatDetail from '../components/ChatDetail'
 import LeftMenu from '../components/LeftMenu'
 import LoadingScreen from '../components/LoadingScreen';
+import Pusher from 'pusher-js'
+import axios from '../service/axios'
+
 
 function Whatsapp() {
   const [progress, setProgress] = useState(0);
@@ -18,6 +21,29 @@ function Whatsapp() {
     },300);
     return()=>clearTimeout(id)
   }, [progress]);
+  const [messages, setMessages] = useState([]);
+  useEffect(()=>{
+    axios.get('/api/v1/messages/sync')
+    .then(response=>{
+      setMessages(response.data)
+    })
+  },[])
+useEffect(() => {
+    //once
+    const pusher = new Pusher('eb05ff1342e028941747', {
+      cluster: 'eu'
+    });
+
+    const channel = pusher.subscribe('message');
+    channel.bind('inserted', (newMessage)=> {
+      setMessages([...messages,newMessage])
+    });
+    return ()=>{
+      channel.unbind_all();
+      channel.unsubscribe();
+    }
+  }, [messages]);
+  console.log(messages);
   return (
     <>
     {loading ? (<LoadingScreen progress={progress} />):(
@@ -28,7 +54,7 @@ function Whatsapp() {
                 <LeftMenu/>
             </div>
             <div className="bg-[#222f35] min-w-[415px] max-w-[1120px] w-full h-screen">
-                <ChatDetail/>
+                <ChatDetail msg={messages}/>
             </div>
         </div>
     </div>
