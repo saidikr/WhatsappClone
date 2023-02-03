@@ -12,25 +12,38 @@ import Message from './Message'
 import { getTime } from '../service/whatsapp'
 import axios from '../service/axios'
 
-function ChatDetail({msg}) {
+function ChatDetail({msg,user}) {
 
- const [messages, setMessages] = useState(msg);
+const [messages, setMessages] = useState(msg);
 const [typing,setTyping]=useState(false);
 const inputRef=useRef(null);
 const BottomRef=useRef(null);
+const name=`${user.firstName} ${user.lastName}`;
 // const addMessage=(msg)=>{
 //   const newMessage=[...messages,msg]
 //   setMessages(newMessage);
 // }
 
+// const handleInputSubmit=async ()=>{
+//   if(inputRef.current.value.length > 0){
+//     await axios.post("/api/v1/messages/new",{
+//         message:inputRef.current.value,
+//         name:"me",
+//         timestamp:'far away',
+//         received:false,
+//       });
+//       inputRef.current.value="";
+//       inputRef.current.focus();
+//       setTyping(false)
+//   }
+//     }
+
 const handleInputSubmit=async ()=>{
   if(inputRef.current.value.length > 0){
-  
-      await axios.post("/api/v1/messages/new",{
+    await axios.post("/api/message/new",{
         message:inputRef.current.value,
-        name:"me",
-        timestamp:'far away',
-        received:false,
+        groupId:"coding spot",
+        userId:`${user.firstName} ${user.lastName}`,
       });
       inputRef.current.value="";
       inputRef.current.focus();
@@ -90,6 +103,7 @@ return (
         <Message 
         key={i}
         msg={msg1}
+        name={name}
         />
       ))}
       <div ref={BottomRef}/>

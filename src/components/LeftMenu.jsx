@@ -9,14 +9,17 @@ import { pp } from '../assets/whatsapp'
 import Chats from './Chats'
 
 
-function LeftMenu() {
+function LeftMenu({user}) {
     const [filter, setFilter] = useState(false);
     return (
     <div className='flex flex-col border-neutral-700 w-full '>
         {/* Profile nav */}
         <div className='sticky top-0'>
         <div className='flex justify-between items-center bg-[#202d33] h-[60px] p-3'>
-            <img src={pp} className='rounded-full w-[40px]' alt="Profile_picture" />
+            <div className='flex'>
+                <img src={pp} className='rounded-full w-[40px] mr-1' alt="Profile_picture" />
+                <p className='text-white mt-1'>{`${user.firstName} ${user.lastName}`}</p>
+            </div>
             <div className='flex justify-between w-[175px]'>
                 <RoundedBtn icon={<MdPeopleAlt/>} />
                 <RoundedBtn icon={<TbCircleDashed/>}/>

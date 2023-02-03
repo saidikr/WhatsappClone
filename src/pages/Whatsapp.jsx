@@ -8,7 +8,7 @@ import Pusher from 'pusher-js'
 import axios from '../service/axios'
 
 
-function Whatsapp() {
+function Whatsapp({user}) {
   const [progress, setProgress] = useState(0);
   const [loading,setLoading]=useState(true);
   useEffect(() => {
@@ -23,7 +23,7 @@ function Whatsapp() {
   }, [progress]);
   const [messages, setMessages] = useState([]);
   useEffect(()=>{
-    axios.get('/api/v1/messages/sync')
+    axios.get('/api/messages/sync')
     .then(response=>{
       setMessages(response.data)
     })
@@ -43,7 +43,6 @@ useEffect(() => {
       channel.unsubscribe();
     }
   }, [messages]);
-  console.log(messages);
   return (
     <>
     {loading ? (<LoadingScreen progress={progress} />):(
@@ -51,10 +50,10 @@ useEffect(() => {
     <div className='w-screen h-screen overflow-hidden'>
         <div className='flex justify-start whatsapp-bp:justify-center items-center bg-[#111a21] h-screen'>
             <div className="bg-[#111a21] min-w-[340px] max-w-[500px] w-full h-screen overflow-y-auto">
-                <LeftMenu/>
+                <LeftMenu user={user} />
             </div>
             <div className="bg-[#222f35] min-w-[415px] max-w-[1120px] w-full h-screen">
-                <ChatDetail msg={messages}/>
+                <ChatDetail user={user} msg={messages}/>
             </div>
         </div>
     </div>
