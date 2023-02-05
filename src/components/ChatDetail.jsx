@@ -98,7 +98,7 @@ return (
       </div>
     </div>
     {/* messages section */}
-    <div style={{padding:"12px 7%"}} className='h-full bg-msg bg-contain overflow-y-scroll' >
+    <div style={{padding:"12px 7%" ,backgroundImage:`url("src/assets/images/bg.webp")`}} className='h-full bg-contain overflow-y-scroll' >
       {msg.map((msg1,i)=>(
         <Message 
         key={i}
