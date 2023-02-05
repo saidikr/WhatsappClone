@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../service/loginSchema";
 import { login } from "../service/auth";
+import { Link } from "react-router-dom";
 
 import {
   successNotification,
@@ -53,10 +54,11 @@ const LoginPage = ({logged,setLogged,setUser}) => {
                                 />
                                 <p className="text-red-600">{errors.password?.message}</p>
                             </div>
-                            <div className="mb-4 mt-3">
-                                <button className="bg-[#005c4b] inline-block align-middle text-center select-none border font-medium whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-site-color text-white hover:scale-110">Login</button>
+                            <div className="mb-4 mt-3 flex justify-between">
+                                <button className="ml-5 bg-[#005c4b] inline-block align-middle text-center select-none border font-medium whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-site-color text-white hover:scale-110">Login</button>
+                                <Link className="mr-10 text-blue-800 font-medium" to="/register">Create an account</Link>
                             </div>
-                        </form>
+                        </form>                      
                     </div>
                 </div>
             </div>

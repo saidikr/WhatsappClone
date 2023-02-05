@@ -1,28 +1,41 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
-import LoginPage from "./pages/LoginPage";
-import Whatsapp from "./pages/Whatsapp"
+import HomePage from "./pages";
+import Register from "./pages/Register";
+import { useEffect } from 'react';
+import LoadingScreen from './components/LoadingScreen';
 
 
 
 function App() {
-  const [logged, setLogged] = useState(false);
-  const [user,setUser]=useState([]);
+  const [progress, setProgress] = useState(0);
+  const [loading,setLoading]=useState(true);
+
+  useEffect(() => {
+    const id=setTimeout(()=>{
+      if(progress>=100) setLoading(false);
+      else{
+        const increment=Math.floor(Math.random()*(10+1))+7
+        setProgress(progress+increment)
+      }
+    },300);
+    return()=>clearTimeout(id)
+  }, [progress]);
+
   return (
+    <>
+    {loading ? (<LoadingScreen progress={progress} />):(
     <div>
-      {/* <Router>
+      <Router>
         <Routes>
-        <Route path="/" element={<PrivateRoute/>} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/register" element={<Register/>} />
         </Routes>
-      </Router> */}
-      <div className={`${logged && "hidden"}`}>
-      <LoginPage logged={logged} setLogged={setLogged} setUser={setUser} />
-      </div>
-      <div className={`${!logged && "hidden"}`}>
-      <Whatsapp user={user} setUser={setUser} />
-      </div>
+      </Router>
     </div>
+            )}
+            </>
   )
 }
 

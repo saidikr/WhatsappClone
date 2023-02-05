@@ -7,10 +7,14 @@ import {HiDotsVertical} from 'react-icons/hi'
 import {BiFilter} from 'react-icons/bi'
 import { pp } from '../assets/whatsapp'
 import Chats from './Chats'
+import {IoIosLogOut} from 'react-icons/io'
 
 
-function LeftMenu({user}) {
+function LeftMenu({user,setLogged}) {
     const [filter, setFilter] = useState(false);
+    const handleLogout=(setLogged)=>{
+            setLogged(false);
+    }
     return (
     <div className='flex flex-col border-neutral-700 w-full '>
         {/* Profile nav */}
@@ -20,11 +24,15 @@ function LeftMenu({user}) {
                 <img src={pp} className='rounded-full w-[40px] mr-1' alt="Profile_picture" />
                 <p className='text-white mt-1'>{`${user.firstName} ${user.lastName}`}</p>
             </div>
-            <div className='flex justify-between w-[175px]'>
-                <RoundedBtn icon={<MdPeopleAlt/>} />
+
+            <div className='flex justify-between w-[175px] hover:cursor-pointer hover:scale-105' onClick={()=>handleLogout(setLogged)} >
+                
+                <IoIosLogOut className='mr-1 mt-1 text-white font-bold text-xl'/>
+                <p className='mr-auto  text-white'>LogOut</p>
+                {/* <RoundedBtn icon={<MdPeopleAlt/>} />
                 <RoundedBtn icon={<TbCircleDashed/>}/>
                 <RoundedBtn icon={<BsFillChatLeftTextFill/>}/>
-                <RoundedBtn icon={<HiDotsVertical/>}/>
+                <RoundedBtn icon={<HiDotsVertical/>}/> */}
             </div>
         </div>
         {/* SearchBar and Filter */}
