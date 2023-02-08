@@ -35,11 +35,11 @@ useEffect(() => {
     <>
     <div className='w-screen h-screen overflow-hidden'>
         <div className='flex justify-start whatsapp-bp:justify-center items-center bg-[#111a21] h-screen'>
-            <div className="bg-[#111a21] min-w-[340px] max-w-[500px] w-full h-screen overflow-y-auto">
+            <div className="hidden md:block bg-[#111a21] min-w-[340px] max-w-[500px] w-full h-screen overflow-y-auto">
                 <LeftMenu user={user} setLogged={setLogged} />
             </div>
             <div className="bg-[#222f35] min-w-[415px] max-w-[1120px] w-full h-screen">
-                <ChatDetail user={user} msg={messages}/>
+                <ChatDetail user={user} msg={messages} setLogged={setLogged}/>
             </div>
         </div>
     </div>

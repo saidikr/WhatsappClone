@@ -7,12 +7,13 @@ import { BiHappy } from 'react-icons/bi'
 import { AiOutlinePaperClip } from 'react-icons/ai'
 import { BsFillMicFill } from 'react-icons/bs'
 // import { messagesData } from '../data/whatsapp'
+import {IoIosLogOut} from 'react-icons/io'
 import { useState,useEffect,useRef } from 'react'
 import Message from './Message'
 import { getTime } from '../service/whatsapp'
 import axios from '../service/axios'
 
-function ChatDetail({msg,user}) {
+function ChatDetail({msg,user,setLogged}) {
 
 const [messages, setMessages] = useState(msg);
 const [typing,setTyping]=useState(false);
@@ -78,6 +79,9 @@ const handleImageUpload=()=>{
 const handleInputChange=()=>{
   inputRef.current.value.length===0 ? setTyping(false):setTyping(true)
 }
+const handleLogout=(setLogged)=>{
+            setLogged(false);
+    }
 return (
 // chat details main container
   <div className='flex flex-col h-screen'>
@@ -92,9 +96,13 @@ return (
         </div>
       </div>
       {/* buttons */}
-      <div className='flex justify-between items-center w-[85px]'>
+      <div className='invisible flex justify-between items-center w-[85px]'>
       <RoundedBtn icon={<MdSearch/>} />        
       <RoundedBtn icon={<HiDotsVertical/>} />
+      </div>
+      <div className='flex justify-between w-[175px] hover:cursor-pointer hover:scale-105 md:hidden' onClick={()=>handleLogout(setLogged)} >
+        <IoIosLogOut className='mr-1 mt-1 text-white font-bold text-xl'/>
+        <p className='mr-auto  text-white'>LogOut</p>
       </div>
     </div>
     {/* messages section */}
@@ -109,11 +117,12 @@ return (
       <div ref={BottomRef}/>
     </div>
     {/* bottom section */}
-    <div className='flex items-center bg-[#202d33] w-100 h-[70px] p-2'>
-      {/* emoji btn */}
-    <RoundedBtn icon={<BiHappy/>} onClick={handleEmojiClick} />
-    {/* upload btn*/}
-    <span className='mr-2'><RoundedBtn onClick={handleImageUpload} icon={<AiOutlinePaperClip/>} /></span>
+    <div className=' flex items-center bg-[#202d33] w-100 h-[70px] p-2'>
+      {/* emoji btn
+    <RoundedBtn className='' icon={<BiHappy/>} onClick={handleEmojiClick} />
+    {/* upload btn}
+    <span className='mr-2'><RoundedBtn onClick={handleImageUpload} icon={<AiOutlinePaperClip/>} /></span> */}
+    
     <input
       onChange={handleInputChange} 
       ref={inputRef}
@@ -122,11 +131,11 @@ return (
       className='bg-[#2c3943] rounded-full pl-2 outline-none text-sm text-neutral-200 w-full h-full placeholder:text-sm placeholder:text-[#8796a1]'
      />
      <span className='ml-2'>
-        {typing?
+        {/* {typing? */}
         <RoundedBtn icon={<MdSend/>} onClick={handleInputSubmit} />
-        : 
+        {/* : 
         <RoundedBtn icon={<BsFillMicFill/>}/>
-      }
+      } */}
             
      </span>
     </div>
